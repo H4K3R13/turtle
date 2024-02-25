@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "turtle",
+  "version": "1.0.0",
+  "description": "A bookmark extention",
+  "icons": {
+    "32": "turtle.png"
+  },
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["scripting"],
+  "host_permissions": ["http://*/*", "https://*/*"]
+}
