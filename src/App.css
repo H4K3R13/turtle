@@ -11,6 +11,19 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px; /* adjust as needed */
+  height: 50px; /* adjust as needed */
+  margin-right: 10px; /* adjust as needed */
+}
+
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
