@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Select from "react-select";
 import axios from "axios";
+import { s } from "vite/dist/node/types.d-jgA8ss1A";
 
 const Form = () => {
   const [url, setUrl] = useState("");
@@ -11,19 +12,15 @@ const Form = () => {
   const [activeTab, setActiveTab] = useState("")
   console.log("KEY", import.meta.env.VITE_SECRET);
 
+  //Gets currents Tabs URL
   async function getCurrentTab() {
-    //let queryOptions = { active: true, currentWindow: true };
-    // let [tab] = await chrome.tabs.query(queryOptions);
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
       let url = tabs[0].url;
       console.log("url in react", url);
       setActiveTab(url)
-      // use `url` here inside the callback because it's asynchronous!
     });
-    //return tab;
   }
-  getCurrentTab()
-  console.log("Current Tab", activeTab);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +42,7 @@ const Form = () => {
     };
 
     fetchData();
+    getCurrentTab()
   }, []);
 
   const handleUrlChange = (e) => {
@@ -60,8 +58,14 @@ const Form = () => {
     console.log("URL:", url);
     console.log(
       "Tags:",
-      selectedTags.map((tag) => tag.value)
+      //selectedTags.map((tag) => tag.value)
+      selectedTags
     );
+    const data = {
+      "Url":url,
+      "Tags":selectedTags
+    }
+    console.log("Data", data)
     // Add your logic here to handle form submission
   };
 
