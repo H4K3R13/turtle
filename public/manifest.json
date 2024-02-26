@@ -11,6 +11,6 @@
     "default_width": 4000,
     "default_height": 6000
   },
-  "permissions": ["scripting"],
+  "permissions": ["scripting","tabs"],
   "host_permissions": ["http://*/*", "https://*/*"]
 }

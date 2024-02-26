@@ -1,0 +1,5 @@
+GET
+
+https://api.baserow.io/api/database/rows/table/260068/
+
+Authorization: Token HgOfMk9hNi5HoAIRHhdlzGgsR0e6WJdG

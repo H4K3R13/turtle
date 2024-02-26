@@ -1,0 +1,10 @@
+POST
+
+https://api.baserow.io/api/database/rows/table/260023/
+
+Authorization: Token HgOfMk9hNi5HoAIRHhdlzGgsR0e6WJdG
+
+{
+    "field_1845735": "GK",
+    "field_1846437": []
+}
