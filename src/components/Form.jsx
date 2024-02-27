@@ -3,47 +3,42 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Select from "react-select";
 import axios from "axios";
-import { s } from "vite/dist/node/types.d-jgA8ss1A";
+import {getTags, getCurrentTab } from "./api"
 
 const Form = () => {
   const [url, setUrl] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
   const [tags, setTags] = useState([]);
-  const [activeTab, setActiveTab] = useState("")
+  const [activeTab, setActiveTab] = useState("");
   console.log("KEY", import.meta.env.VITE_SECRET);
 
-  //Gets currents Tabs URL
-  async function getCurrentTab() {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-      let url = tabs[0].url;
-      console.log("url in react", url);
-      setActiveTab(url)
-    });
-  }
-  
+
 
   useEffect(() => {
+
+    // gets all the tags from Baserow
     const fetchData = async () => {
       try {
-        const response = await axios({
-          method: "GET",
-          url: "https://api.baserow.io/api/database/rows/table/260023/?user_field_names=true",
-          headers: {
-            Authorization: `Token ${import.meta.env.VITE_SECRET}`,
-          },
-        });
-        console.log("reponse", response);
+        const response = await getTags();
+        console.log("Tags Response", response)
         const tagsData = response.data.results.map((row) => row.Name);
         const uniqueTags = Array.from(new Set(tagsData.flat()));
         setTags(uniqueTags);
       } catch (error) {
-        console.error("Error fetching tags:", error);
+        console.error('Error fetching user Tags', error);
       }
-    };
+    }
+
+    // gets the current active tab
+    const getTab = async () => {
+      const url = await getCurrentTab()
+      setActiveTab(url)
+    }
 
     fetchData();
-    getCurrentTab()
+    getTab();
   }, []);
+
 
   const handleUrlChange = (e) => {
     setUrl(e.target.value);
@@ -62,10 +57,10 @@ const Form = () => {
       selectedTags
     );
     const data = {
-      "Url":url,
-      "Tags":selectedTags
-    }
-    console.log("Data", data)
+      Url: url,
+      Tags: selectedTags,
+    };
+    console.log("Data", data);
     // Add your logic here to handle form submission
   };
 

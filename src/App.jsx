@@ -3,8 +3,6 @@ import Form from "./components/Form";
 import Bookmarks from "./components/Bookmarks";
 import "./App.css";
 
-
-
 function App() {
   return (
     <>
