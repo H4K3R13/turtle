@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Select from "react-select";
-import axios from "axios";
-import {getTags, getCurrentTab } from "./api"
+import { getTags, submitBookmark } from "./api";
 
 const Form = () => {
   const [url, setUrl] = useState("");
@@ -12,33 +11,34 @@ const Form = () => {
   const [activeTab, setActiveTab] = useState("");
   console.log("KEY", import.meta.env.VITE_SECRET);
 
-
+  // //Gets currents Tabs URL
+  async function getCurrentTab() {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+      let url = tabs[0].url;
+      console.log("url in react", url);
+      setActiveTab(url);
+      setUrl(url);
+    });
+  }
 
   useEffect(() => {
-
-    // gets all the tags from Baserow
+    //gets all tags from Baserow
     const fetchData = async () => {
       try {
         const response = await getTags();
-        console.log("Tags Response", response)
+        console.log("Tags Response", response);
         const tagsData = response.data.results.map((row) => row.Name);
         const uniqueTags = Array.from(new Set(tagsData.flat()));
         setTags(uniqueTags);
       } catch (error) {
-        console.error('Error fetching user Tags', error);
+        console.error("Error fetching user Tags", error);
       }
-    }
+    };
 
-    // gets the current active tab
-    const getTab = async () => {
-      const url = await getCurrentTab()
-      setActiveTab(url)
-    }
-
+    getCurrentTab();
+    //setActiveTab("https://example.com");
     fetchData();
-    getTab();
   }, []);
-
 
   const handleUrlChange = (e) => {
     setUrl(e.target.value);
@@ -51,17 +51,14 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("URL:", url);
-    console.log(
-      "Tags:",
-      //selectedTags.map((tag) => tag.value)
-      selectedTags
-    );
+    const tags = selectedTags.map((tag) => tag.value);
+    console.log("Tags:", tags);
     const data = {
       Url: url,
-      Tags: selectedTags,
+      Tags: tags,
     };
     console.log("Data", data);
-    // Add your logic here to handle form submission
+    submitBookmark(data);
   };
 
   return (
@@ -70,7 +67,7 @@ const Form = () => {
         label="URL"
         variant="outlined"
         value={activeTab}
-        onChange={handleUrlChange}
+        onLoad={handleUrlChange}
         fullWidth
         margin="normal"
         sx={{ backgroundColor: "white", borderRadius: ".5rem" }}

@@ -17,11 +17,18 @@ export const getTags = async () => {
   }
 };
 
-export const getCurrentTab = async() => {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-      let url = tabs[0].url;
-      console.log("url in react", url);
-      return url
-      setActiveTab(url);
+export const submitBookmark = async (data) => {
+  try {
+    const response = await axios({
+      method: "POST",
+      url: "https://api.baserow.io/api/database/rows/table/260068/?user_field_names=true",
+      headers: {
+        Authorization: `Token ${import.meta.env.VITE_SECRET}`,
+      },
+      data: data,
     });
+    console.log("submission response", response);
+  } catch (error) {
+    console.error("Error submitted bookmark", error);
   }
+};
