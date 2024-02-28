@@ -3,6 +3,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Select from "react-select";
 import { getTags, submitBookmark } from "./api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Form = () => {
   const [url, setUrl] = useState("");
@@ -48,7 +50,7 @@ const Form = () => {
     setSelectedTags(selectedOptions);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("URL:", url);
     const tags = selectedTags.map((tag) => tag.value);
@@ -58,39 +60,48 @@ const Form = () => {
       Tags: tags,
     };
     console.log("Data", data);
-    submitBookmark(data);
+    try {
+      await submitBookmark(data);
+      toast.success("Bookmark added successfully!");
+    } catch (error) {
+      console.error("Error adding bookmark", error);
+      toast.error("Failed to add bookmark");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="URL"
-        variant="outlined"
-        value={activeTab}
-        onLoad={handleUrlChange}
-        fullWidth
-        margin="normal"
-        sx={{ backgroundColor: "white", borderRadius: ".5rem" }}
-      />
-      <Select
-        isMulti
-        options={tags.map((tag) => ({ value: tag, label: tag }))}
-        onChange={handleTagsChange}
-        value={selectedTags}
-        sx={{ borderRadius: ".5rem" }}
-      />
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{
-          backgroundColor: "green",
-          borderRadius: ".5rem",
-          margin: ".2rem",
-        }}
-      >
-        Add
-      </Button>
-    </form>
+    <>
+      <ToastContainer />
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="URL"
+          variant="outlined"
+          value={activeTab}
+          onLoad={handleUrlChange}
+          fullWidth
+          margin="normal"
+          sx={{ backgroundColor: "white", borderRadius: ".5rem" }}
+        />
+        <Select
+          isMulti
+          options={tags.map((tag) => ({ value: tag, label: tag }))}
+          onChange={handleTagsChange}
+          value={selectedTags}
+          sx={{ borderRadius: ".5rem" }}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            backgroundColor: "green",
+            borderRadius: ".5rem",
+            margin: ".2rem",
+          }}
+        >
+          Add
+        </Button>
+      </form>
+    </>
   );
 };
 

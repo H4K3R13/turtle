@@ -27,26 +27,33 @@ const SearchBar = () => {
         const data = await getURL();
         console.log("url data in Searchbar", data);
         setData(data);
-        const tagOptions = data.results.flatMap((item) =>
-          item.Tags.map((tag) => ({
-            id: tag.id,
-            value: tag.value,
-            label: tag.value,
-          }))
-        );
+
+        //Filter out duplicate tags
+        const uniqueTags = new Set();
+        const tagOptions = data.results
+          .flatMap((item) =>
+            item.Tags.map((tag) => {
+              if (!uniqueTags.has(tag.value)) {
+                uniqueTags.add(tag.value);
+                return {
+                  id: tag.id,
+                  value: tag.value,
+                  label: tag.value,
+                };
+              }
+              return null;
+            })
+          )
+          .filter((tag) => tag !== null);
+
         setTagOptions(tagOptions);
       } catch (error) {
         console.error("Error fetching user Tags", error);
       }
     };
 
-    //setActiveTab("https://example.com");
     fetchData();
   }, []);
-
-  // const data = getURL()
-  // console.log("url data in Searchbar", data)
-  // const tagOptions = data.results.flatMap((item) => item.Tags.map((tag) => ({ id: tag.id, value: tag.value, label: tag.value })));
 
   return (
     <div>
@@ -57,14 +64,25 @@ const SearchBar = () => {
         value={selectedTags}
         placeholder="Select tags"
       />
-      <ul>
-        {filteredUrls.map((item) => (
-          <li key={item.id}>
-            <a href={item.Url} target="_blank" rel="noreferrer">
-              {item.Url}
-            </a>
-          </li>
-        ))}
+      <ul
+        style={{
+          backgroundColor: "lightgray",
+          padding: "10px",
+          borderRadius: "5px",
+        }}
+      >
+ {selectedTags.length === 0 ? (
+      <li style={{ color: "gray" }}>Select tags</li>
+    ) : (
+      filteredUrls.map((item) => (
+        <li key={item.id}>
+          <a href={item.Url} target="_blank" rel="noreferrer">
+            <strong>{item.Url}</strong> -{" "}
+            {item.Tags.map((tag) => tag.value).join(", ")}
+          </a>
+        </li>
+      ))
+    )}
       </ul>
     </div>
   );
