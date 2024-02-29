@@ -11,6 +11,8 @@ const Form = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [tags, setTags] = useState([]);
   const [activeTab, setActiveTab] = useState("");
+  const [newTag, setNewTag] = useState("");
+
   console.log("KEY", import.meta.env.VITE_SECRET);
 
   // //Gets currents Tabs URL
@@ -53,7 +55,11 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("URL:", url);
+    //const tags = selectedTags.map((tag) => tag.value);
     const tags = selectedTags.map((tag) => tag.value);
+    if (newTag.trim() !== "") {
+      tags.push(newTag.trim());
+    }
     console.log("Tags:", tags);
     const data = {
       Url: url,
