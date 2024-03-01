@@ -60,7 +60,7 @@ const Form = () => {
     if (newTag.trim() !== "") {
       tags.push(newTag.trim());
     }
-    console.log("Tags:", tags);
+    console.log("Tags", tags);
     const data = {
       Url: url,
       Tags: tags,
