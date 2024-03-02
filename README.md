@@ -6,6 +6,7 @@ easy to use Google Chrome extension for bookmarking with labels.
 
 Clone the repo and build the project.
 ```bash
+yarn 
 yarn run build
 ```
 
