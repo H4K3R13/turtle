@@ -14,23 +14,16 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import turtleLogo from "/turtle.png";
 
-const pages = ["turtle"];
 const settings = ["Logout"];
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -40,7 +33,7 @@ const Navbar = () => {
     <AppBar position="static" sx={{ bgcolor: "#242424" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <a href="https://vitejs.dev" target="_blank">
+          <a href="https://github.com/H4K3R13" target="_blank">
             <img src={turtleLogo} className="logo" alt="turtle logo" />
           </a>
           <Typography
