@@ -1,10 +1,10 @@
 POST
 
-https://api.baserow.io/api/database/rows/table/260023/
+https://api.baserow.io/api/database/rows/table/260023/?user_field_names=true
 
 Authorization: Token HgOfMk9hNi5HoAIRHhdlzGgsR0e6WJdG
 
 {
-    "field_1845735": "GK",
-    "field_1846437": []
+    "Name": "Phone",
+    "urls": []
 }

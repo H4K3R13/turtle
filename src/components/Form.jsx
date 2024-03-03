@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Select from "react-select";
-import { getTags, submitBookmark } from "./api";
+import Select, { components } from "react-select";
+import { getTags, submitBookmark, addTag } from "./api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,9 +13,7 @@ const Form = () => {
   const [activeTab, setActiveTab] = useState("");
   const [newTag, setNewTag] = useState("");
 
-  console.log("KEY", import.meta.env.VITE_SECRET);
-
-  // //Gets currents Tabs URL
+  //Gets current Tab's URL
   async function getCurrentTab() {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
       let url = tabs[0].url;
@@ -52,14 +50,41 @@ const Form = () => {
     setSelectedTags(selectedOptions);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const newTagValue = event.target.value.trim();
+      if (newTagValue !== "") {
+        setSelectedTags([
+          ...selectedTags,
+          { value: newTagValue, label: newTagValue },
+        ]);
+        setNewTag("");
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("URL:", url);
-    const tags = selectedTags.map((tag) => tag.value);
-    console.log("Tags", tags);
+
+    // Get the newly added tags
+    const newTags = selectedTags.filter((tag) => !tags.includes(tag.value));
+    const addnewTags = newTags.map((tag) => tag.value);
+    console.log("New Tags", addnewTags);
+    //Add api call to do create new tags
+    addTag(addnewTags)
+
+    // Get the existing tags
+    const existingTags = selectedTags.filter((tag) => tags.includes(tag.value));
+    console.log("Existing Tags", existingTags);
+
+    const finalTags = selectedTags.map((tag) => tag.value);
+    console.log("Tags for submission", finalTags);
+
     const data = {
       Url: url,
-      Tags: tags,
+      Tags: finalTags,
     };
     console.log("Data", data);
     try {
@@ -79,7 +104,7 @@ const Form = () => {
           label="URL"
           variant="outlined"
           value={activeTab}
-          onLoad={handleUrlChange}
+          onChange={handleUrlChange}
           fullWidth
           margin="normal"
           sx={{ backgroundColor: "white", borderRadius: ".5rem" }}
@@ -89,8 +114,11 @@ const Form = () => {
           options={tags.map((tag) => ({ value: tag, label: tag }))}
           onChange={handleTagsChange}
           value={selectedTags}
+          onKeyDown={handleKeyDown}
+          placeholder="Type or select tags..."
           sx={{ borderRadius: ".5rem" }}
         />
+
         <Button
           type="submit"
           variant="contained"

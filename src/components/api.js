@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_URL = "https://api.baserow.io/";
 
+// to fetch tags
 export const getTags = async () => {
   try {
     const response = await axios({
@@ -17,6 +18,7 @@ export const getTags = async () => {
   }
 };
 
+// to add new url to bookmark
 export const submitBookmark = async (data) => {
   try {
     const response = await axios({
@@ -33,6 +35,7 @@ export const submitBookmark = async (data) => {
   }
 };
 
+// to get url
 export const getURL = async () => {
   try {
     const response = await axios({
@@ -48,4 +51,26 @@ export const getURL = async () => {
   } catch (error) {
     console.error("Error fetching urls:", error);
   }
+};
+
+// to create new tags
+export const addTag = (tag) => {
+  tag.forEach((element) => {
+    try {
+      const response = axios({
+        method: "POST",
+        url: `${API_URL}api/database/rows/table/260023/?user_field_names=true`,
+        headers: {
+          Authorization: `Token ${import.meta.env.VITE_SECRET}`,
+        },
+        data: {
+          Name: element,
+          urls: [],
+        },
+      });
+      console.log("submission response for tags", response);
+    } catch (error) {
+      console.error("Error submitted bookmark", error);
+    }
+  });
 };
