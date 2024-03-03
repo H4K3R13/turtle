@@ -8,6 +8,7 @@ Authorization: Token HgOfMk9hNi5HoAIRHhdlzGgsR0e6WJdG
     "Url": "https://example.io",
     "Tags": [
         "Shop",
-        "Tech"
+        "Tech",
+        "GUY"
     ]
 }

@@ -30,6 +30,7 @@ export const submitBookmark = async (data) => {
       data: data,
     });
     console.log("submission response", response);
+    return response.status
   } catch (error) {
     console.error("Error submitted bookmark", error);
   }
@@ -54,8 +55,8 @@ export const getURL = async () => {
 };
 
 // to create new tags
-export const addTag = (tag) => {
-  tag.forEach((element) => {
+export const addTag = async (tag) => {
+  await tag.forEach((element) => {
     try {
       const response = axios({
         method: "POST",

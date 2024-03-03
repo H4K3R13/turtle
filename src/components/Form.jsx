@@ -11,7 +11,7 @@ const Form = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [tags, setTags] = useState([]);
   const [activeTab, setActiveTab] = useState("");
-  const [newTag, setNewTag] = useState("");
+  //const [newTag, setNewTag] = useState("");
 
   //Gets current Tab's URL
   async function getCurrentTab() {
@@ -37,8 +37,8 @@ const Form = () => {
       }
     };
 
-    //getCurrentTab();
-    setActiveTab("https://example.com");
+    getCurrentTab();
+    //setActiveTab("https://example.com"); //used during development 
     fetchData();
   }, []);
 
@@ -59,7 +59,7 @@ const Form = () => {
           ...selectedTags,
           { value: newTagValue, label: newTagValue },
         ]);
-        setNewTag("");
+        //setNewTag("");
       }
     }
   };
@@ -73,7 +73,10 @@ const Form = () => {
     const addnewTags = newTags.map((tag) => tag.value);
     console.log("New Tags", addnewTags);
     //Add api call to do create new tags
-    addTag(addnewTags)
+    await addTag(addnewTags);
+
+    // Wait for 2 seconds
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Get the existing tags
     const existingTags = selectedTags.filter((tag) => tags.includes(tag.value));
@@ -87,11 +90,10 @@ const Form = () => {
       Tags: finalTags,
     };
     console.log("Data", data);
-    try {
-      await submitBookmark(data);
+    const status = await submitBookmark(data);
+    if (status == 200) {
       toast.success("Bookmark added successfully!");
-    } catch (error) {
-      console.error("Error adding bookmark", error);
+    } else {
       toast.error("Failed to add bookmark");
     }
   };
