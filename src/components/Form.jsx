@@ -37,8 +37,8 @@ const Form = () => {
       }
     };
 
-    getCurrentTab();
-    //setActiveTab("https://example.com"); //used during development 
+    //getCurrentTab();
+    setActiveTab("https://example.com"); //used during development 
     fetchData();
   }, []);
 

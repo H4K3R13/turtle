@@ -5,10 +5,10 @@ https://api.baserow.io/api/database/rows/table/260068/?user_field_names=true
 Authorization: Token HgOfMk9hNi5HoAIRHhdlzGgsR0e6WJdG
 
 {
-    "Url": "https://example.io",
+    "Url": "https://alabama.com",
     "Tags": [
         "Shop",
         "Tech",
-        "GUY"
-    ]
+    ],
+    "user":"test@test.com"
 }

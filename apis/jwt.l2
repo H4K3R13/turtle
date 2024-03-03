@@ -1,0 +1,8 @@
+GET
+
+https://api.baserow.io/api/database/rows/table/262939/?user_field_names=true
+
+Authorization: Token HgOfMk9hNi5HoAIRHhdlzGgsR0e6WJdG
+
+
+{"filter_type":"AND","filters":[{"type":"equal","field":"email","value":"test@gmail.com"},{"type":"equal","field":"password","value":"test@123"}],"groups":[]}
