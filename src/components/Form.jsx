@@ -39,8 +39,8 @@ const Form = () => {
       }
     };
 
-    getCurrentTab();
-    //setActiveTab("https://example.com");
+    //getCurrentTab();
+    setActiveTab("https://example.com");
     fetchData();
   }, []);
 
@@ -55,11 +55,7 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("URL:", url);
-    //const tags = selectedTags.map((tag) => tag.value);
     const tags = selectedTags.map((tag) => tag.value);
-    if (newTag.trim() !== "") {
-      tags.push(newTag.trim());
-    }
     console.log("Tags", tags);
     const data = {
       Url: url,
