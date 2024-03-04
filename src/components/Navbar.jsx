@@ -13,21 +13,26 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import turtleLogo from "/turtle.png";
+import { googleLogout } from "@react-oauth/google";
 
 const settings = ["Logout"];
 
 const Navbar = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  console.log("User", props.user)
+  console.log("User", props.user);
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = () => {
+    googleLogout();
+    console.log("Logout");
   };
 
   return (
@@ -96,6 +101,7 @@ const Navbar = (props) => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Button onClick={handleLogout}>HELLO</Button>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
