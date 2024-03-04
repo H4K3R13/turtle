@@ -16,7 +16,7 @@ import turtleLogo from "/turtle.png";
 
 const settings = ["Logout"];
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
 
@@ -24,6 +24,7 @@ const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+  console.log("User", props.user)
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -74,7 +75,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={props.user.picture} />
               </IconButton>
             </Tooltip>
             <Menu

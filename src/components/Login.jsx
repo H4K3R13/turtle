@@ -1,38 +1,32 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import Home from "./Home";
-
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-
-  const handleGoogleSignIn = () => {
-    const auth = window.gapi.auth2.getAuthInstance();
-    auth.signIn().then((googleUser) => {
-      const profile = googleUser.getBasicProfile();
-      console.log('ID:', profile.getId());
-      console.log('Name:', profile.getName());
-      console.log('Email:', profile.getEmail());
-      setLoggedIn(true);
-    });
-  };
-
-  
+  const [user, setUser] = useState({})
 
   if (loggedIn) {
-    return <Home />;
+    return <Home user={user} />;
   }
 
   return (
     <>
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <h2>Login with Google</h2>
-      <Button variant="contained" onClick={handleGoogleSignIn}>
-        Login with Google
-      </Button>
-    </div>
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          var credentialResponse = jwtDecode(credentialResponse.credential)
+          console.log(credentialResponse);
+          setUser(credentialResponse)
+          setLoggedIn(true);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
+      ;
     </>
   );
-}
+};
 
 export default Login;
