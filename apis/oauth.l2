@@ -1,0 +1,3 @@
+POST
+
+https://accounts.google.com/o/oauth2/v2/auth?client_id=791186457310-dokutkb0uekegquccairo5fq46qe8aoa.apps.googleusercontent.com&response_type=id_token&scope=openid&prompt=consent

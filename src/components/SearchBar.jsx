@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { getURL } from "./api";
+import { Typography } from "@mui/material";
 
 const SearchBar = () => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -57,6 +58,7 @@ const SearchBar = () => {
 
   return (
     <div>
+      <Typography>Select the required tags to explore you bookmarks!</Typography>
       <Select
         isMulti
         options={tagOptions}
