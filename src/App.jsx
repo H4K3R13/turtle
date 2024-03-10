@@ -9,9 +9,8 @@ function App() {
   return (
     <>
       {/* <GoogleOAuthProvider clientId="791186457310-dokutkb0uekegquccairo5fq46qe8aoa.apps.googleusercontent.com"> */}
-        <Login />
-      {/* </GoogleOAuthProvider> */}
-      ;
+      <Login />
+      {/* </GoogleOAuthProvider> */};
     </>
   );
 }

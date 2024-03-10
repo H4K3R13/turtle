@@ -13,8 +13,8 @@ const Form = (props) => {
   const [activeTab, setActiveTab] = useState("");
   const [user, setUser] = useState();
 
-  setUser(props.user)
-  console.log("User in From", user)
+  const userid = props.user
+  console.log("User in From", props.user, userid)
 
   //Gets current Tab's URL
   async function getCurrentTab() {

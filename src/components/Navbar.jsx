@@ -17,14 +17,13 @@ import { googleLogout } from "@react-oauth/google";
 
 const settings = ["Logout"];
 
-const Navbar = (props) => {
+const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  console.log("User", props.user);
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
