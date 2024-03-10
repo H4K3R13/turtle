@@ -79,6 +79,24 @@ export const addTag = async (tag) => {
 // to add userID from Google OAuth
 const addUser = async (userID) => {
   console.log("userID", userID)
+  var flag = 0
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `${API_URL}api/database/rows/table/262939/?user_field_names=true&filter__field_1868162__equal=${userID}`,
+      headers: {
+        Authorization: `Token ${import.meta.env.VITE_SECRET}`,
+      }
+    });
+    console.log("Checking User", response , response.status);
+    if (response.data.count == 0){
+      flag = 1
+    }
+  }catch(error){
+    console.error("Error while checking user", error)
+  }
+
+  if (flag == 1){
   try {
     const response = await axios({
       method: "POST",
@@ -97,6 +115,7 @@ const addUser = async (userID) => {
     console.error("Error submitted bookmark", error);
     throw error; // re-throw the error to propagate it
   }
+}
 }
 
 export const login = () => {

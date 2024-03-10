@@ -58,7 +58,9 @@ const SearchBar = () => {
 
   return (
     <div>
-      <Typography>Select the required tags to explore you bookmarks!</Typography>
+      <Typography style={{ color: "white" }}>
+      Select the required tags to explore your bookmarks!
+    </Typography>
       <Select
         isMulti
         options={tagOptions}

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Home from "./Home";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 import { Button } from "@mui/material";
 import { login } from "./api";
 import Navbar from "./Navbar";

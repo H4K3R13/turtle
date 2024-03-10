@@ -13,8 +13,7 @@ const Form = (props) => {
   const [activeTab, setActiveTab] = useState("");
   const [user, setUser] = useState();
 
-  const userid = props.user
-  console.log("User in From", props.user, userid)
+  console.log("User in From", props.user)
 
   //Gets current Tab's URL
   async function getCurrentTab() {
@@ -43,6 +42,7 @@ const Form = (props) => {
     getCurrentTab();
     //setActiveTab("https://example.com"); //used during development 
     fetchData();
+    setUser(props.user)
   }, []);
 
   const handleUrlChange = (e) => {
