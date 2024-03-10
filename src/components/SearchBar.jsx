@@ -8,7 +8,7 @@ const SearchBar = (props) => {
   const [filteredUrls, setFilteredUrls] = useState([]);
   const [tagOptions, setTagOptions] = useState();
   const [data, setData] = useState();
-  const [user, setUser] = useState()
+  const [user, setUser] = useState();
   const handleTagsChange = (selectedOptions) => {
     setSelectedTags(selectedOptions);
     filterUrls(selectedOptions);
@@ -55,14 +55,14 @@ const SearchBar = (props) => {
     };
 
     fetchData();
-    setUser(props.user)
+    setUser(props.user);
   }, []);
 
   return (
-    <div>
+    <div style={{marginTop:".5rem"}}>
       <Typography style={{ color: "white" }}>
-      Select the required tags to explore your bookmarks!
-    </Typography>
+        Explore your bookmarks using tags!
+      </Typography>
       <Select
         isMulti
         options={tagOptions}
@@ -75,20 +75,25 @@ const SearchBar = (props) => {
           backgroundColor: "lightgray",
           padding: "10px",
           borderRadius: "5px",
+          listStylePosition: "inside", // Move list bullets inside
         }}
       >
- {selectedTags.length === 0 ? (
-      <li style={{ color: "gray" }}>Select tags</li>
-    ) : (
-      filteredUrls.map((item) => (
-        <li key={item.id}>
-          <a href={item.Url} target="_blank" rel="noreferrer">
-            <strong>{item.Url}</strong> -{" "}
-            {item.Tags.map((tag) => tag.value).join(", ")}
-          </a>
-        </li>
-      ))
-    )}
+        {selectedTags.length === 0 ? (
+          <li style={{ color: "gray" }}>
+            Select the your tags to explore your bookmarks!
+          </li>
+        ) : (
+          filteredUrls.map((item) => (
+            <li key={item.id} style={{ marginLeft: "20px" }}>
+              {" "}
+              {/* Adjust left padding for bullets */}
+              <a href={item.Url} target="_blank" rel="noreferrer">
+                <strong>{item.Url}</strong> -{" "}
+                {item.Tags.map((tag) => tag.value).join(", ")}
+              </a>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
