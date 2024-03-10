@@ -17,7 +17,7 @@ const Login = () => {
       const userID = await login();
       console.log("User ID Response", userID);
       const data = userID 
-      localStorage.setItem('turtleUser', JSON.stringify(data));
+      localStorage.setItem('turtleUser', JSON.stringify(data)); // userID is getting saved 2 times. 
       if (userID) {
         setUser(userID);
         setLoggedIn(true);

@@ -166,7 +166,9 @@ export const login = () => {
           console.log("userID", userID);
           try {
             const result = await addUser(userID);
-            console.log("User added:", result);
+            localStorage.setItem('turtleUser', JSON.stringify(result));
+            const storedResult = localStorage.getItem("turtleUser")
+            console.log("User added:", result, "Stored Item", storedResult);
             resolve(result); // Resolve with the result from addUser
           } catch (error) {
             console.error("Error adding user:", error);
