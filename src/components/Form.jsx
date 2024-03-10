@@ -29,7 +29,7 @@ const Form = (props) => {
     //gets all tags from Baserow
     const fetchData = async () => {
       try {
-        const response = await getTags();
+        const response = await getTags(props.user.id);
         console.log("Tags Response", response);
         const tagsData = response.data.results.map((row) => row.Name);
         const uniqueTags = Array.from(new Set(tagsData.flat()));
@@ -76,7 +76,7 @@ const Form = (props) => {
     const addnewTags = newTags.map((tag) => tag.value);
     console.log("New Tags", addnewTags);
     //Add api call to do create new tags
-    await addTag(addnewTags);
+    await addTag(addnewTags, props.user.userID);
 
     // Wait for 2 seconds
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -91,6 +91,7 @@ const Form = (props) => {
     const data = {
       Url: url,
       Tags: finalTags,
+      user: props.user.userID,
     };
     console.log("Data", data);
     const status = await submitBookmark(data);

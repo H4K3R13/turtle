@@ -1,5 +1,6 @@
 GET
 
-https://api.baserow.io/api/database/rows/table/260023/
+https://api.baserow.io/api/database/rows/table/260023/?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22link_row_has%22%2C%22field%22%3A%22user%22%2C%22value%22%3A%2290%22%7D%5D%2C%22groups%22%3A%5B%5D%7D
+
 
 Authorization: Token HgOfMk9hNi5HoAIRHhdlzGgsR0e6WJdG

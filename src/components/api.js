@@ -3,11 +3,12 @@ import { jwtDecode } from "jwt-decode";
 const API_URL = "https://api.baserow.io/";
 
 // to fetch tags
-export const getTags = async () => {
+export const getTags = async (id) => {
+  console.log("getTags id", id);
   try {
     const response = await axios({
       method: "GET",
-      url: `${API_URL}api/database/rows/table/260023/?user_field_names=true`,
+      url: `${API_URL}api/database/rows/table/260023/?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22link_row_has%22%2C%22field%22%3A%22user%22%2C%22value%22%3A%22${id}%22%7D%5D%2C%22groups%22%3A%5B%5D%7D`,
       headers: {
         Authorization: `Token ${import.meta.env.VITE_SECRET}`,
       },
@@ -37,16 +38,17 @@ export const submitBookmark = async (data) => {
 };
 
 // to get url
-export const getURL = async () => {
+export const getURL = async (id) => {
   try {
     const response = await axios({
       method: "GET",
-      url: `${API_URL}api/database/rows/table/260068/?user_field_names=true`,
+      url: `${API_URL}api/database/rows/table/260068/?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22link_row_has%22%2C%22field%22%3A%22user%22%2C%22value%22%3A%22${id}%22%7D%5D%2C%22groups%22%3A%5B%5D%7D
+      `,
       headers: {
         Authorization: `Token ${import.meta.env.VITE_SECRET}`,
       },
     });
-    console.log("url response", response.data);
+    console.log("getURL response", response.data);
 
     return response.data;
   } catch (error) {
@@ -55,7 +57,7 @@ export const getURL = async () => {
 };
 
 // to create new tags
-export const addTag = async (tag) => {
+export const addTag = async (tag, userID) => {
   await tag.forEach((element) => {
     try {
       const response = axios({
@@ -67,6 +69,7 @@ export const addTag = async (tag) => {
         data: {
           Name: element,
           urls: [],
+          user: userID,
         },
       });
       console.log("submission response for tags", response);
@@ -78,45 +81,45 @@ export const addTag = async (tag) => {
 
 // to add userID from Google OAuth
 const addUser = async (userID) => {
-  console.log("userID", userID)
-  var flag = 0
+  console.log("userID", userID);
   try {
     const response = await axios({
       method: "GET",
       url: `${API_URL}api/database/rows/table/262939/?user_field_names=true&filter__field_1868162__equal=${userID}`,
       headers: {
         Authorization: `Token ${import.meta.env.VITE_SECRET}`,
-      }
+      },
     });
-    console.log("Checking User", response , response.status);
-    if (response.data.count == 0){
-      flag = 1
-    }
-  }catch(error){
-    console.error("Error while checking user", error)
-  }
+    console.log("Checking User", response, response.status);
 
-  if (flag == 1){
-  try {
-    const response = await axios({
-      method: "POST",
-      url: `${API_URL}api/database/rows/table/262939/?user_field_names=true`,
-      headers: {
-        Authorization: `Token ${import.meta.env.VITE_SECRET}`,
-        "Content-Type": "application/json",
-      },
-      data: {
-        userID: userID,
-      },
-    });
-    console.log("addUser Response", response , response.status);
-    return response.status;
+    if (response.data.count === 0) {
+      // User not found, add the user
+      const addUserResponse = await axios({
+        method: "POST",
+        url: `${API_URL}api/database/rows/table/262939/?user_field_names=true`,
+        headers: {
+          Authorization: `Token ${import.meta.env.VITE_SECRET}`,
+          "Content-Type": "application/json",
+        },
+        data: {
+          userID: userID,
+        },
+      });
+      console.log("addUser Response", addUserResponse, addUserResponse.status);
+
+      // Return the newly added user's ID
+      return { id: addUserResponse.data.id, userID: userID };
+    } else {
+      // User already exists, return the existing user's ID
+      const existingUserID = response.data.results[0].id;
+      console.log("Existing User ID", existingUserID);
+      return { id: existingUserID, userID: userID };
+    }
   } catch (error) {
-    console.error("Error submitted bookmark", error);
-    throw error; // re-throw the error to propagate it
+    console.error("Error adding or checking user:", error);
+    throw error; // Re-throw the error to propagate it
   }
-}
-}
+};
 
 export const login = () => {
   return new Promise((resolve, reject) => {
@@ -145,7 +148,7 @@ export const login = () => {
         url: url,
         interactive: true,
       },
-      function (redirectedTo) {
+      async function (redirectedTo) {
         if (chrome.runtime.lastError) {
           // Example: Authorization page could not be loaded.
           console.log(chrome.runtime.lastError.message);
@@ -154,12 +157,21 @@ export const login = () => {
           var response = redirectedTo.split("#", 2)[1];
           console.log("OAuth Response", response);
           var credentialResponse = jwtDecode(response);
-          console.log("credential Response", credentialResponse, credentialResponse.sub);
+          console.log(
+            "credential Response",
+            credentialResponse,
+            credentialResponse.sub
+          );
           userID = credentialResponse.sub;
           console.log("userID", userID);
-          addUser(userID)
-            .then(() => resolve(userID))
-            .catch((error) => reject(error));
+          try {
+            const result = await addUser(userID);
+            console.log("User added:", result);
+            resolve(result); // Resolve with the result from addUser
+          } catch (error) {
+            console.error("Error adding user:", error);
+            reject(error); // Reject with the error from addUser
+          }
         }
       }
     );

@@ -3,11 +3,12 @@ import Select from "react-select";
 import { getURL } from "./api";
 import { Typography } from "@mui/material";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [filteredUrls, setFilteredUrls] = useState([]);
   const [tagOptions, setTagOptions] = useState();
   const [data, setData] = useState();
+  const [user, setUser] = useState()
   const handleTagsChange = (selectedOptions) => {
     setSelectedTags(selectedOptions);
     filterUrls(selectedOptions);
@@ -25,7 +26,7 @@ const SearchBar = () => {
     //gets all urls from Baserow
     const fetchData = async () => {
       try {
-        const data = await getURL();
+        const data = await getURL(props.user.id);
         console.log("url data in Searchbar", data);
         setData(data);
 
@@ -54,6 +55,7 @@ const SearchBar = () => {
     };
 
     fetchData();
+    setUser(props.user)
   }, []);
 
   return (
