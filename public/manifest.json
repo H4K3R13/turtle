@@ -5,8 +5,8 @@
   "description": "A bookmark extention",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmr9Eqm4DaIWrId5ZT+9qA5evvWJ4n1s8QyyO/5Sb3rQZ1/ALVekQfX9BCJFNvVWNAVr4tBamVMK3NDycqPhOqHhAa6jIJXZ8iiklp7EpP9ZJ1pH1v8ylJ4yrsVsm3wWFXC7dK3km3NTxWhzZyUiPgxS1RdNxuwIHOT84FSWQX6TNwqhhT/63fA417QUQo3QQj1hacMhy1cZQnc0gIzNgKs3aSONtobD0KbKUt4DDvyqoxBrn9ISmm9tk1omTS5KeJ/hfeELjgV/ZmCa2vs9g0H1s2k23HuWORts+s+6VKtBwk1vwf0ogoyhrlrT78sJcBN1K0P+0kVjvc2X5oDTtXQIDAQAB",
   "oauth2": {
-    "client_id": "791186457310-dokutkb0uekegquccairo5fq46qe8aoa.apps.googleusercontent.com",
-    "scopes": ["profile email", "https://www.googleapi.com/auth/contacts"]
+    "client_id": "791186457310-ncgumo7399en3n323efn0h575956e8v0.apps.googleusercontent.com",
+    "scopes": ["profile email", "https://www.googleapis.com/auth/"]
   },
   "icons": {
     "32": "turtle.png"
@@ -16,7 +16,6 @@
     "default_width": 4000,
     "default_height": 6000
   },
-  "permissions": ["scripting", "tabs", "identity", "identity.email"],
-  "host_permissions": ["http://*/*", "https://*/*"]
-  
+  "permissions": [ "identity" ],
+  "host_permissions": ["http://*/*", "https://*/*"]  
 }

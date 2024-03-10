@@ -6,12 +6,15 @@ import { getTags, submitBookmark, addTag } from "./api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Form = () => {
+const Form = (props) => {
   const [url, setUrl] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
   const [tags, setTags] = useState([]);
   const [activeTab, setActiveTab] = useState("");
-  //const [newTag, setNewTag] = useState("");
+  const [user, setUser] = useState();
+
+  setUser(props.user)
+  console.log("User in From", user)
 
   //Gets current Tab's URL
   async function getCurrentTab() {
@@ -37,8 +40,8 @@ const Form = () => {
       }
     };
 
-    //getCurrentTab();
-    setActiveTab("https://example.com"); //used during development 
+    getCurrentTab();
+    //setActiveTab("https://example.com"); //used during development 
     fetchData();
   }, []);
 

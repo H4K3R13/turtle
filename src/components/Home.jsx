@@ -7,7 +7,7 @@ const Home = (props) => {
     <>
       <div style={{ textAlign: "center", padding: "8px" }}>
       <Navbar user={props.user}/>
-        <Form />
+        <Form user={props.user}/>
         <SearchBar />
       </div>
     </>
