@@ -89,6 +89,11 @@ const SearchBar = (props) => {
           <Card key={item.id} style={{ width: "95%", margin: "10px" }}>
             <CardContent>
               <Typography variant="h6" component="h2">
+                <img
+                  src={`https://www.google.com/s2/favicons?sz=32&domain_url=${item.Url}`}
+                  alt="favicon"
+                  style={{ marginRight: "0.5rem" }}
+                />
                 <a href={item.Url} target="_blank" rel="noreferrer">
                   {item.Url}
                 </a>
