@@ -60,6 +60,18 @@ const SearchBar = (props) => {
     setUser(props.user);
   }, []);
 
+  //Function not implemented to get the title of a url
+  const fetchPageTitle = async (url) => {
+    try {
+      const response = await axios.get(url);
+      const $ = cheerio.load(response.data);
+      return $('title').text();
+    } catch (error) {
+      console.error('Error fetching webpage title:', error);
+      return 'Untitled'; // Default title if fetching fails
+    }
+  };
+
   return (
     <div style={{ marginTop: ".5rem" }}>
       <Typography style={{ color: "white" }}>
