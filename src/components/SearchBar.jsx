@@ -59,7 +59,7 @@ const SearchBar = (props) => {
   }, []);
 
   return (
-    <div style={{marginTop:".5rem"}}>
+    <div style={{ marginTop: ".5rem" }}>
       <Typography style={{ color: "white" }}>
         Explore your bookmarks using tags!
       </Typography>
@@ -69,6 +69,18 @@ const SearchBar = (props) => {
         onChange={handleTagsChange}
         value={selectedTags}
         placeholder="Select tags"
+        styles={{
+          control: (provided) => ({
+            ...provided,
+            fontSize: "16px", // Increase font size
+            minHeight: "50px", // Increase select box height
+          }),
+          option: (provided) => ({
+            ...provided,
+            fontSize: "16px", // Increase font size
+            padding: "10px", // Increase padding
+          }),
+        }}
       />
       <ul
         style={{
@@ -84,7 +96,7 @@ const SearchBar = (props) => {
           </li>
         ) : (
           filteredUrls.map((item) => (
-            <li key={item.id} style={{ marginLeft: "20px" }}>
+            <li key={item.id} style={{ marginLeft: "20px", fontSize: "15px" }}>
               {" "}
               {/* Adjust left padding for bullets */}
               <a href={item.Url} target="_blank" rel="noreferrer">

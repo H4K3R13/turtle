@@ -123,6 +123,19 @@ const Form = (props) => {
           onKeyDown={handleKeyDown}
           placeholder="Type or select tags..."
           sx={{ borderRadius: ".5rem" }}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              fontSize: "16px", // Increase font size
+              minHeight: "50px", // Increase select box height
+            }),
+            option: (provided) => ({
+              ...provided,
+              fontSize: "16px", // Increase font size
+              padding: "10px", // Increase padding
+            }),
+          }}
+          
         />
 
         <Button
