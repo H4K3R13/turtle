@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "#242424" }}>
+    <AppBar position="static" sx={{ bgcolor: "#242424" , borderRadius:"1rem" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <a href="https://github.com/H4K3R13" target="_blank">
