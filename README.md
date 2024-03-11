@@ -4,14 +4,37 @@ turtle is a Google Chrome extension that enhances bookmarking by allowing users 
 
 ### How to setup
 
-Clone the project
-```bash git clone https://github.com/H4K3R13/turtle.git 
-
+- Clone the project
 
 ```bash
-yarn 
+ git clone https://github.com/H4K3R13/turtle.git
+```
+
+- Change the directory
+
+```bash
+cd turtle
+```
+
+- Install node modules
+
+```bash
+yarn
+```
+
+- Build the project
+
+```bash
 yarn run build
 ```
+
+- Create the .env.local in the root folder
+
+```env
+VITE_SECRET=<BASEROW_AUTH_TOKEN>
+```
+
+Follow these steps to load the extension in Google Chrome
 
 - Step 1: Navigate to Chromes extensions settings
   ![alt text](./images/Screenshot 2024-02-28 at 21.06.57.png)
