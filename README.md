@@ -34,13 +34,13 @@ yarn run build
 VITE_SECRET=<BASEROW_AUTH_TOKEN>
 ```
 
-Follow these steps to load the extension in Google Chrome
+### Follow these steps to load the extension in Google Chrome
 
 Step 1: Navigate to Chromes extensions settings
-  ![alt text](./images/Screenshot 2024-02-28 at 21.06.57.png)
+  ![image1](./images/Screenshot%202024-02-28%20at%2021.06.57.png)
 Step 2: Click on `Load unpacked`
-  ![alt text](./images/Screenshot 2024-02-28 at 21.07.18.png)
+  ![image2](./images/Screenshot%202024-02-28%20at%2021.07.18.png)
 Step 3: Select the build folder
-  ![alt text](./images/Screenshot 2024-02-28 at 21.07.49.png)
+  ![image3](./images/Screenshot%202024-02-28%20at%2021.07.49.png)
 Step 4: The extensions will load up here
-  ![alt text](./images/Screenshot 2024-02-28 at 21.07.58.png)
+  ![image4](./images/Screenshot%202024-02-28%20at%2021.07.58.png)
