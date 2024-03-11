@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("turtleUser")
     console.log("Logout");
-    return <Login/>
+    window.close();
   };
 
   return (
