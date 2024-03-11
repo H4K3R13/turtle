@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { getURL } from "./api";
-import { Typography } from "@mui/material";
+import { Typography, Card, CardContent } from "@mui/material";
+import { IconButton } from "@mui/material";
+import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 
 const SearchBar = (props) => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -82,31 +84,31 @@ const SearchBar = (props) => {
           }),
         }}
       />
-      <ul
-        style={{
-          backgroundColor: "lightgray",
-          padding: "10px",
-          borderRadius: "5px",
-          listStylePosition: "inside", // Move list bullets inside
-        }}
-      >
-        {selectedTags.length === 0 ? (
-          <li style={{ color: "gray" }}>
-            Select the your tags to explore your bookmarks!
-          </li>
-        ) : (
-          filteredUrls.map((item) => (
-            <li key={item.id} style={{ marginLeft: "20px", fontSize: "15px" }}>
-              {" "}
-              {/* Adjust left padding for bullets */}
-              <a href={item.Url} target="_blank" rel="noreferrer">
-                <strong>{item.Url}</strong> -{" "}
-                {item.Tags.map((tag) => tag.value).join(", ")}
-              </a>
-            </li>
-          ))
-        )}
-      </ul>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {filteredUrls.map((item) => (
+          <Card key={item.id} style={{ width: "95%", margin: "10px" }}>
+            <CardContent>
+              <Typography variant="h6" component="h2">
+                <a href={item.Url} target="_blank" rel="noreferrer">
+                  {item.Url}
+                </a>
+                <IconButton
+                  onClick={() => {
+                    navigator.clipboard.writeText(item.Url);
+                  }}
+                  size="small"
+                  aria-label="copy"
+                >
+                  <FileCopyOutlinedIcon fontSize="small" />
+                </IconButton>
+              </Typography>
+              <Typography color="textSecondary">
+                Tags: {item.Tags.map((tag) => tag.value).join(", ")}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };
