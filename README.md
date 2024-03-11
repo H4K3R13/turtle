@@ -36,11 +36,11 @@ VITE_SECRET=<BASEROW_AUTH_TOKEN>
 
 Follow these steps to load the extension in Google Chrome
 
-- Step 1: Navigate to Chromes extensions settings
+Step 1: Navigate to Chromes extensions settings
   ![alt text](./images/Screenshot 2024-02-28 at 21.06.57.png)
-- Step 2: Click on `Load unpacked`
+Step 2: Click on `Load unpacked`
   ![alt text](./images/Screenshot 2024-02-28 at 21.07.18.png)
-- Step 3: Select the build folder
+Step 3: Select the build folder
   ![alt text](./images/Screenshot 2024-02-28 at 21.07.49.png)
-- Step 4: The extensions will load up here
+Step 4: The extensions will load up here
   ![alt text](./images/Screenshot 2024-02-28 at 21.07.58.png)
