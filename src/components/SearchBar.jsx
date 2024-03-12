@@ -65,10 +65,10 @@ const SearchBar = (props) => {
     try {
       const response = await axios.get(url);
       const $ = cheerio.load(response.data);
-      return $('title').text();
+      return $("title").text();
     } catch (error) {
-      console.error('Error fetching webpage title:', error);
-      return 'Untitled'; // Default title if fetching fails
+      console.error("Error fetching webpage title:", error);
+      return "Untitled"; // Default title if fetching fails
     }
   };
 
@@ -102,7 +102,7 @@ const SearchBar = (props) => {
             <CardContent>
               <Typography variant="h6" component="h2">
                 <img
-                  src={`https://www.google.com/s2/favicons?sz=32&domain_url=${item.Url}`}
+                  src={`https://www.google.com/s2/favicons?sz=16&domain_url=${item.Url}`}
                   alt="favicon"
                   style={{ marginRight: "0.5rem" }}
                 />
