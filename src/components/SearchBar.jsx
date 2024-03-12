@@ -4,6 +4,8 @@ import { getURL } from "./api";
 import { Typography, Card, CardContent } from "@mui/material";
 import { IconButton } from "@mui/material";
 import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
+import cheerio from "cheerio"
+import axios from "axios";
 
 const SearchBar = (props) => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -107,7 +109,7 @@ const SearchBar = (props) => {
                   style={{ marginRight: "0.5rem" }}
                 />
                 <a href={item.Url} target="_blank" rel="noreferrer">
-                  {item.Url}
+                  {item.Url}  
                 </a>
                 <IconButton
                   onClick={() => {
