@@ -7,6 +7,8 @@ import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 import cheerio from "cheerio"
 import axios from "axios";
 
+import getTitleAtUrl from 'get-title-at-url';
+
 const SearchBar = (props) => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [filteredUrls, setFilteredUrls] = useState([]);
@@ -30,7 +32,11 @@ const SearchBar = (props) => {
     //gets all urls from Baserow
     const fetchData = async () => {
       try {
-        const data = await getURL(props.user.id);
+        const userString = localStorage.getItem("turtleUser");
+        const user = JSON.parse(userString);
+        console.log("user localStorage", user, "user.id", user.id);
+        
+        const data = await getURL(user.id);
         console.log("url data in Searchbar", data);
         setData(data);
 
@@ -109,7 +115,7 @@ const SearchBar = (props) => {
                   style={{ marginRight: "0.5rem" }}
                 />
                 <a href={item.Url} target="_blank" rel="noreferrer">
-                  {item.Url}  
+                  {item.Url} 
                 </a>
                 <IconButton
                   onClick={() => {

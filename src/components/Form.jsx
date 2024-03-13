@@ -29,7 +29,11 @@ const Form = (props) => {
     //gets all tags from Baserow
     const fetchData = async () => {
       try {
-        const response = await getTags(props.user.id);
+        const userString = localStorage.getItem("turtleUser");
+        const user = JSON.parse(userString);
+        console.log("user localStorage", user, "user.id", user.id);
+        
+        const response = await getTags(user.id);
         console.log("Tags Response", response);
         const tagsData = response.data.results.map((row) => row.Name);
         const uniqueTags = Array.from(new Set(tagsData.flat()));

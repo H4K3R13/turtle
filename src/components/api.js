@@ -13,6 +13,7 @@ export const getTags = async (id) => {
         Authorization: `Token ${import.meta.env.VITE_SECRET}`,
       },
     });
+    console.log("getTags Response", response)
     return response;
   } catch (error) {
     console.error("Error fetching tags:", error);
@@ -40,6 +41,7 @@ export const submitBookmark = async (data) => {
 // to get url
 export const getURL = async (id) => {
   try {
+    console.log("getURL id", id)
     const response = await axios({
       method: "GET",
       url: `${API_URL}api/database/rows/table/260068/?user_field_names=true&filters=%7B%22filter_type%22%3A%22AND%22%2C%22filters%22%3A%5B%7B%22type%22%3A%22link_row_has%22%2C%22field%22%3A%22user%22%2C%22value%22%3A%22${id}%22%7D%5D%2C%22groups%22%3A%5B%5D%7D
@@ -48,7 +50,7 @@ export const getURL = async (id) => {
         Authorization: `Token ${import.meta.env.VITE_SECRET}`,
       },
     });
-    console.log("getURL response", response.data);
+    console.log("getURL response", response);
 
     return response.data;
   } catch (error) {
