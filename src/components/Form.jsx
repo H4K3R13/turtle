@@ -80,7 +80,10 @@ const Form = (props) => {
     const addnewTags = newTags.map((tag) => tag.value);
     console.log("New Tags", addnewTags);
     //Add api call to do create new tags
-    await addTag(addnewTags, props.user.userID);
+    const userString = localStorage.getItem("turtleUser");
+    const user = JSON.parse(userString);
+    console.log("user localStorage in addTag() calling", user, "user.userID", user.userID);
+    await addTag(addnewTags, user.userID);
 
     // Wait for 2 seconds
     await new Promise((resolve) => setTimeout(resolve, 2000));
