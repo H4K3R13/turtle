@@ -4,10 +4,10 @@ import { getURL } from "./api";
 import { Typography, Card, CardContent } from "@mui/material";
 import { IconButton } from "@mui/material";
 import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
-import cheerio from "cheerio"
+import cheerio from "cheerio";
 import axios from "axios";
 
-import getTitleAtUrl from 'get-title-at-url';
+import getTitleAtUrl from "get-title-at-url";
 
 const SearchBar = (props) => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -35,7 +35,7 @@ const SearchBar = (props) => {
         const userString = localStorage.getItem("turtleUser");
         const user = JSON.parse(userString);
         console.log("user localStorage", user, "user.id", user.id);
-        
+
         const data = await getURL(user.id);
         console.log("url data in Searchbar", data);
         setData(data);
@@ -80,6 +80,9 @@ const SearchBar = (props) => {
     }
   };
 
+  const truncate = (str, maxLength) =>
+    str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
+
   return (
     <div style={{ marginTop: ".5rem" }}>
       <Typography style={{ color: "white" }}>
@@ -115,7 +118,7 @@ const SearchBar = (props) => {
                   style={{ marginRight: "0.5rem" }}
                 />
                 <a href={item.Url} target="_blank" rel="noreferrer">
-                  {item.Url} 
+                  {truncate(item.Url, 30)} {/* Truncate URL to 50 characters */}
                 </a>
                 <IconButton
                   onClick={() => {
