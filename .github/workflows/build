@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  #Allow repo secrets
+  env:
+    VITE_SECRET: ${{ secrets.VITE_SECRET }}
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Build Project
+        run: yarn run build
+
+      - name: Archive Build
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -r turtle.zip dist
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build.zip
