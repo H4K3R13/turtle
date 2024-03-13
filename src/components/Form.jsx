@@ -13,7 +13,7 @@ const Form = (props) => {
   const [activeTab, setActiveTab] = useState("");
   const [user, setUser] = useState();
 
-  console.log("User in From", props.user)
+  console.log("User in From", props.user);
 
   //Gets current Tab's URL
   async function getCurrentTab() {
@@ -32,7 +32,7 @@ const Form = (props) => {
         const userString = localStorage.getItem("turtleUser");
         const user = JSON.parse(userString);
         console.log("user localStorage", user, "user.id", user.id);
-        
+
         const response = await getTags(user.id);
         console.log("Tags Response", response);
         const tagsData = response.data.results.map((row) => row.Name);
@@ -44,9 +44,9 @@ const Form = (props) => {
     };
 
     getCurrentTab();
-    //setActiveTab("https://example.com"); //used during development 
+    //setActiveTab("https://example.com"); //used during development
     fetchData();
-    setUser(props.user)
+    setUser(props.user);
   }, []);
 
   const handleUrlChange = (e) => {
@@ -82,11 +82,16 @@ const Form = (props) => {
     //Add api call to do create new tags
     const userString = localStorage.getItem("turtleUser");
     const user = JSON.parse(userString);
-    console.log("user localStorage in addTag() calling", user, "user.userID", user.userID);
+    console.log(
+      "user localStorage in addTag() and submitBookmarl() calling",
+      user,
+      "user.userID",
+      user.userID
+    );
     await addTag(addnewTags, user.userID);
 
-    // Wait for 2 seconds
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Wait for 1 seconds
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Get the existing tags
     const existingTags = selectedTags.filter((tag) => tags.includes(tag.value));
@@ -98,7 +103,7 @@ const Form = (props) => {
     const data = {
       Url: url,
       Tags: finalTags,
-      user: props.user.userID,
+      user: user.userID,
     };
     console.log("Data", data);
     const status = await submitBookmark(data);
@@ -142,7 +147,6 @@ const Form = (props) => {
               padding: "10px", // Increase padding
             }),
           }}
-          
         />
 
         <Button
