@@ -7,6 +7,10 @@ import Form from "./Form";
 import SearchBar from "./SearchBar";
 import { useEffect } from "react";
 import turtleLogo from "/turtle.png";
+import GoogleIcon from "@mui/icons-material/Google";
+
+
+import Typography from "@mui/material/Typography";
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -16,8 +20,8 @@ const Login = () => {
     try {
       const userID = await login();
       console.log("User ID Response", userID);
-      const data = userID 
-      localStorage.setItem('turtleUser', JSON.stringify(data)); // userID is getting saved 2 times. 
+      const data = userID;
+      localStorage.setItem("turtleUser", JSON.stringify(data)); // userID is getting saved 2 times.
       if (userID) {
         setUser(userID);
         setLoggedIn(true);
@@ -27,14 +31,13 @@ const Login = () => {
     }
   };
 
-  useEffect(()=>{
-    const userID = localStorage.getItem('turtleUser')
+  useEffect(() => {
+    const userID = localStorage.getItem("turtleUser");
     if (userID) {
       setUser(userID);
       setLoggedIn(true);
     }
-
-  },[])
+  }, []);
   if (loggedIn) {
     console.log("Logged In");
     return (
@@ -48,6 +51,50 @@ const Login = () => {
 
   return (
     <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "10px",
+        }}
+      >
+        <a
+          href="https://github.com/H4K3R13"
+          target="_blank"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            color: "#fff",
+            textDecoration: "none",
+          }}
+        >
+          <img
+            src={turtleLogo}
+            className="logo"
+            alt="turtle logo"
+            style={{ marginRight: "5px" }}
+          />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            turtle
+          </Typography>
+        </a>
+      </div>
       <Button
         onClick={handleClick}
         style={{
@@ -55,22 +102,17 @@ const Login = () => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          padding: "10px",
-          backgroundImage:
-            "url('https://www.gstatic.com/images/icons/material/product/2x/google_identity_grey600_24dp.png')",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "24px 24px",
-          border: "none",
-          borderRadius: "5px",
+          padding: "6px 12px",
+          borderRadius: "10rem",
           cursor: "pointer",
           boxShadow: "0px 0px 5px 0px rgba(255, 255, 255, 0.993)",
+          backgroundColor: "#fff",
+          color: "#333",
+          textTransform: "none", // Prevent text from being displayed in all caps
         }}
+        startIcon={<GoogleIcon />}
       >
-                  <a href="https://github.com/H4K3R13" target="_blank">
-            <img src={turtleLogo} className="logo" alt="turtle logo" />
-          </a>
-        Sign In Using Google
+        Sign In With Google
       </Button>
     </>
   );

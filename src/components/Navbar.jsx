@@ -6,18 +6,20 @@ import Login from "./Login";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import turtleLogo from "/turtle.png";
-
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
-
   const handleLogout = () => {
-    localStorage.removeItem("turtleUser")
+    localStorage.removeItem("turtleUser");
     console.log("Logout");
     window.close();
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "#242424" , borderRadius:"1rem" }}>
+    <AppBar
+      position="static"
+      sx={{ bgcolor: "#242424", borderRadius: "0.2rem" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <a href="https://github.com/H4K3R13" target="_blank">
@@ -59,7 +61,17 @@ const Navbar = () => {
             turtle
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
-            <Button onClick={handleLogout}>Logout</Button>
+            <Button
+              onClick={handleLogout}
+              startIcon={<LogoutIcon />}
+              variant="contained"
+              color="error"
+              sx={{
+                padding: "3.5px 7px",
+              }}
+            >
+              Logout
+            </Button>
           </Box>
         </Toolbar>
       </Container>
