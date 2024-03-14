@@ -84,7 +84,7 @@ const SearchBar = (props) => {
     str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
 
   return (
-    <div style={{ marginTop: ".5rem" }}>
+    <div style={{ marginTop: "1.3rem" }}>
       <Typography style={{ color: "white" }}>
         Explore your bookmarks using tags!
       </Typography>
@@ -109,7 +109,7 @@ const SearchBar = (props) => {
       />
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {filteredUrls.map((item) => (
-          <Card key={item.id} style={{ width: "95%", margin: "10px" }}>
+          <Card key={item.id} style={{ width: "95%", margin: "8px" }}>
             <CardContent>
               <Typography variant="h6" component="h2">
                 <img
