@@ -166,10 +166,12 @@ export const login = () => {
           userID = credentialResponse.sub;
           console.log("userID", userID);
           try {
+            setTimeout(() => console.log("WAITING TO STORE"), 3000);
             const result = await addUser(userID);
             localStorage.setItem("turtleUser", JSON.stringify(result));
             const storedResult = localStorage.getItem("turtleUser");
             console.log("User added:", result, "Stored Item", storedResult);
+            setTimeout(() => console.log("WAITING TO STORE"), 2000);
             resolve(result); // Resolve with the result from addUser
           } catch (error) {
             console.error("Error adding user:", error);
