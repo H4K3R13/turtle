@@ -7,8 +7,7 @@ import Form from "./Form";
 import SearchBar from "./SearchBar";
 import { useEffect } from "react";
 import turtleLogo from "/turtle.png";
-import GoogleIcon from "@mui/icons-material/Google";
-
+import GoogleIcon from "./googleIcon.png";
 
 import Typography from "@mui/material/Typography";
 
@@ -106,11 +105,17 @@ const Login = () => {
           borderRadius: "10rem",
           cursor: "pointer",
           boxShadow: "0px 0px 5px 0px rgba(255, 255, 255, 0.993)",
-          backgroundColor: "#fff",
-          color: "#333",
+          backgroundColor: "#717171",
+          color: "#ffffff",
           textTransform: "none", // Prevent text from being displayed in all caps
         }}
-        startIcon={<GoogleIcon />}
+        startIcon={
+          <img
+            src={GoogleIcon}
+            alt="Google Icon"
+            style={{ width: "24px", height: "24px" }}
+          />
+        }
       >
         Sign In With Google
       </Button>
