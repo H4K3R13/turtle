@@ -125,7 +125,14 @@ const Form = (props) => {
           onChange={handleUrlChange}
           fullWidth
           margin="normal"
-          sx={{ backgroundColor: "white", borderRadius: ".5rem", marginTop: "1rem" }}
+          InputLabelProps={{
+            style: { color: "green" },
+          }}
+          sx={{
+            backgroundColor: "white",
+            borderRadius: ".5rem",
+            marginTop: "1rem",
+          }}
         />
         <Select
           isMulti
@@ -134,7 +141,7 @@ const Form = (props) => {
           value={selectedTags}
           onKeyDown={handleKeyDown}
           placeholder="Type or select tags..."
-          sx={{ borderRadius: ".5rem",marginTop: "0.5rem" }}
+          sx={{ borderRadius: ".5rem", marginTop: "0.5rem" }}
           styles={{
             control: (provided) => ({
               ...provided,
@@ -155,7 +162,7 @@ const Form = (props) => {
           sx={{
             backgroundColor: "green",
             borderRadius: ".5rem",
-            marginTop: "0.5rem"
+            marginTop: "0.5rem",
           }}
         >
           Add

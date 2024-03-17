@@ -105,8 +105,8 @@ const Login = () => {
           borderRadius: "10rem",
           cursor: "pointer",
           boxShadow: "0px 0px 5px 0px rgba(255, 255, 255, 0.993)",
-          backgroundColor: "#717171",
-          color: "#ffffff",
+          backgroundColor: "#ffffff",
+          color: "#000000",
           textTransform: "none", // Prevent text from being displayed in all caps
         }}
         startIcon={
