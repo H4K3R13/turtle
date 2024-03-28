@@ -2,6 +2,8 @@
 
 turtle is a Google Chrome extension that enhances bookmarking by allowing users to tag their bookmarks for easy organization and retrieval. The extension provides a simple and intuitive interface for adding tags to bookmarks, making it easier to categorize and find them later.
 
+### Demo : ![video](https://www.loom.com/share/aba116b65b3b4c1b8303cf9fc27b81fb?sid=add931b9-8987-45bc-b052-92978ea6ff5c)
+
 ### How to setup
 
 - Clone the project
